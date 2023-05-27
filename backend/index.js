@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors');
 const { Configuration, OpenAIApi } = require('openai')
 
 const { OPENAI_API_KEY2, OPENAI_API_KEY, PORT } = process.env
@@ -13,6 +14,7 @@ const openai = new OpenAIApi(configuration);
 const app = express()
 app.use(express.json())
 
+app.use(cors());
 
 // GET localhost:4000/hello -> {"mensagem": "Hello direto do Back-endnpm,"}
 app.get('/hello', (req, res) => {
