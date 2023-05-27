@@ -25,10 +25,12 @@ export default function App() {
   }
 
   const teste = (index) => {
-    let newArray = perguntas.splice(index, 1)
+    console.log(perguntas[0])
+
+    let newArray = perguntas.filter((item) => item.id !== index)
 
     console.log(newArray+"- New")
-    console.log(perguntas+"- Perguntas")
+    
 
     setPerguntas(newArray)
 
@@ -61,7 +63,7 @@ export default function App() {
 
       setPerguntas(perguntas => {
       
-        let aux3 = pergunta+' '+resposta
+        let aux3 = {id: Date.now(), texto: pergunta+' '+resposta}
   
         const aux = [aux3, ...perguntas]
   
@@ -102,10 +104,10 @@ export default function App() {
               
               //console.log(l),
               
-              <ListItem style={styles.itemNaLista} onLongPress={() => teste(index)}>
+              <ListItem style={styles.itemNaLista} onLongPress={() => teste(l.id)}>
                 <ListItem.Content style={styles.texto}>
           
-                  <Text>{l}</Text>
+                  <Text>{l.texto}</Text>
                    
                 </ListItem.Content>
               </ListItem> 
