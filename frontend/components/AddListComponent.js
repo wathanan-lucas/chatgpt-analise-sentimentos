@@ -102,7 +102,7 @@ export default function App() {
               <ListItem style={styles.itemNaLista} onLongPress={() => updateList(l.id)}>
                 <ListItem.Content style={styles.texto}>
           
-                  <Text>{l.texto}</Text>
+                  <Text style={styles.resposta}>{l.texto}</Text>
                     
                 </ListItem.Content>
               </ListItem> 
@@ -159,6 +159,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Calibri',
     marginBottom: '50px',
     color: 'white'
+  },
+  resposta: {
+    fontSize: '20px',
+    fontFamily: 'Calibri',
+    color: '#343444'
   }
   
 })
