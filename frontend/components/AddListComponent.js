@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Input, Button, ListItem  } from '@rneui/themed';
+import { Input, Button, ListItem } from '@rneui/themed';
+import { Image } from 'react-native';
+import Imagem  from '../assets/favicon.png'
 
 import {
   StyleSheet,
@@ -8,7 +10,10 @@ import {
   View 
 } from 'react-native';
 
+
+
 import * as perguntaService from '../service/perguntaService'
+
 
 export default function App() {
   const [pergunta, setPergunta] = useState('')
@@ -39,6 +44,7 @@ export default function App() {
 
 
   const enviarRequisicao = async (pergunta)  => {
+
     try{
       const res = await perguntaService.realizarPergunta({texto: pergunta})
       let resposta = res.data.sentimento
@@ -67,17 +73,24 @@ export default function App() {
   
   return (
     <View style={styles.container}>
+        <div>
+            <h1 style={styles.titulo}>Digite uma frase para o chatGPT</h1>
+            <Image 
+                source={Imagem}
+            />
+        </div>
+        
       <View>
           <Input
             style={styles.lembreteTextInput}
-            placeholder='Desejo lembrar...'
+            placeholder='Digite sua frase'
             onChangeText={capturarPergunta}
             value= {pergunta}
           />
           <Button 
             title="Enviar"
             style={styles.lembreteTextInput}
-            buttonStyle={{ backgroundColor: 'rgba(39, 39, 39, 1)' }}
+            buttonStyle={{ backgroundColor: '#343444' }}
             onPress={adicionarPergunta}
           />
       </View>
@@ -105,21 +118,23 @@ const styles = StyleSheet.create({
   container: {
     padding: 40,
     width: '100%',
+    backgroundColor: '#242424'
   },
   lembreteTextInput: {
     padding: 12,
     textAlign: 'center',
     outlineStyle: 'none',
-    marginBottom: 4
+    marginBottom: 4,
+    color: 'white'
   },
   itemNaLista: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 12,
-    borderColor: '#AAA',
-    borderWidth: 1,
-    backgroundColor: '',
+    borderColor: '#343444',
+    borderWidth: 3,
+    backgroundColor: 'white',
     marginBottom: 10,
     textAlign: 'center',
     borderRadius: 4,
@@ -129,17 +144,21 @@ const styles = StyleSheet.create({
     marginBottom: 4
   },
   viewLista: {
-    padding: '100px'
+    padding: '100px',
+    backgroundColor: 'red'
   },
   view: {
-    // display: 'flex',
-    // justifyContent: 'center',
-    // alignItems: 'center'
-
     textAlign: 'center'
   },
   texto: {
     backgroundColor: 'white'
+  },
+  titulo: {
+    textAlign:'center',
+    fontSize: '25px',
+    fontFamily: 'Calibri',
+    marginBottom: '50px',
+    color: 'white'
   }
   
 })
