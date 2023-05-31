@@ -48,11 +48,14 @@ export default function App() {
     try{
       const res = await perguntaService.realizarPergunta({texto: pergunta})
       let resposta = res.data.sentimento
-      console.log(res.data.sentimento)
+      let newResp = resposta.replace('\n', '')
+    
+      console.log(resposta)
+    
 
       setPerguntas(perguntas => {
       
-        let aux3 = {id: Date.now(), texto: pergunta+' '+resposta}
+        let aux3 = {id: Date.now(), texto: pergunta, respostaChat: newResp }
   
         const aux = [aux3, ...perguntas]
   
@@ -74,10 +77,12 @@ export default function App() {
   return (
     <View style={styles.container}>
         <div>
-            <h1 style={styles.titulo}>Digite uma frase para o chatGPT</h1>
-            <Image 
-                source={Imagem}
-            />
+          <h1 style={styles.titulo}>Digite uma frase para o chatGPT</h1>
+          <Image 
+            source={require('../assets/BB-8.png')}
+          />
+
+           
         </div>
         
       <View>
@@ -98,11 +103,12 @@ export default function App() {
           {
             perguntas.map((l) => (
               
-      
+              
               <ListItem style={styles.itemNaLista} onLongPress={() => updateList(l.id)}>
                 <ListItem.Content style={styles.texto}>
-          
-                  <Text style={styles.resposta}>{l.texto}</Text>
+                  
+                  <ListItem.Title style={styles.Title}>{l.texto}</ListItem.Title>
+                  <ListItem.Subtitle style={styles.Subtitle}>{l.respostaChat}</ListItem.Subtitle>         
                     
                 </ListItem.Content>
               </ListItem> 
@@ -151,6 +157,9 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   texto: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'white'
   },
   titulo: {
@@ -164,6 +173,21 @@ const styles = StyleSheet.create({
     fontSize: '20px',
     fontFamily: 'Calibri',
     color: '#343444'
+  },
+  Title: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '50px',
+    fontFamily: 'Calibri',
+    fontSize: '20px'
+  },
+  Subtitle: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontFamily: 'Calibri',
+    fontSize: '18px'
   }
   
 })
