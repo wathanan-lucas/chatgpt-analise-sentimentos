@@ -26,7 +26,7 @@ app.post('/sentimentos', (req,res) => {
     const { texto } = req.body
     openai.createCompletion({
         model: 'text-davinci-003',
-        prompt: `Diga qual o sentimento associado ao seguinte texto usando apenas uma palavra(Positivo, Neutro, Negativo) e adicione um emoji: ${texto}`,
+        prompt: `Diga qual o sentimento associado ao seguinte texto usando apenas uma palavra(Positivo, Neutro, Negativo), adicione um emoji e não complete a frase: ${texto}`,
         max_tokens: 100
     })
     .then(chatGPTResponse => {
